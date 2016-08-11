@@ -5,4 +5,11 @@ class Cat
     @meal_time = meal time
 
   end
-end 
+
+
+
+  b = Cat.new ("Bob","fish",5)
+  m = Cat.new ("Mary","rats",20)
+
+
+end
