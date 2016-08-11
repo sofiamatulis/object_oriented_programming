@@ -1,39 +1,35 @@
 class Paperboy
 
 
-    attr_reader :name, :experience, :earnings
+    attr_reader :name, :experience, :side, :earnings
 
-    def initialize (name,experience,side,earnings)
+    def initialize (name,side)
       @name= name
-      @experience=experience
       @side=side
-      @earnings=earnings
+      @experience=0
 
 
     end
 
-
-    def side
-      if @side % 2 == 0
-        puts "even"
-      else
-        puts "odd"
-    end
-  end
 
     def quota
       50 + @experience/2
     end
 
-    def deliver (start_address, end_address)
-     if quota = 50
-       then (@end_address - @start_address) * 0.25
-     elsif quota > 50
-       then (50*0.25 + (quota - 50)*0.5)
-     elsif quota < 50
-       then (50*0.25)-2
-     end
-   end
+
+
+    def deliver(start_address, end_address)
+      @experience = (@experience + (end_address-start_address)/2)
+      if @experience == 50
+      then @experience * 0.25
+    elsif @experience > 50
+         then (50*0.25 + (@experience - 50)*0.5)
+       elsif @experience < 50
+          then (@experience*0.25)-2
+          end
+    end
+
+
 
 
 def report
@@ -43,6 +39,7 @@ end
 
 
 
-
-
 end
+
+tommy = Paperboy.new("Tommy", "even")
+puts tommy.experience
