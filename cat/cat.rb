@@ -11,8 +11,10 @@ class Cat
   end
 
 def eats_at
-  if  meal_time <= 23 && meal_time >= 0
-    return @meal_time
+  if  meal_time < 12 && meal_time > 0
+    return "#{@meal_time} am"
+  elsif meal_time > 12  && meal_time <23
+    return "#{@meal_time - 12} pm"
   end
 end
 
