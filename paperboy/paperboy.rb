@@ -8,6 +8,15 @@ class Paperboy
       @experience=experience
       @side=side
       @earnings=earnings
-    
+
 
     end
+
+
+    def quota
+      50 + @experience/2
+    end
+
+
+
+end
