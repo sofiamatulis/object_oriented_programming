@@ -1,33 +1,74 @@
 class Paperboy
 
 
-    attr_reader :name, :experience, :side, :earnings
+    attr_reader :name, :experience, :side,  :earnings
 
     def initialize (name,side)
       @name= name
       @side=side
       @experience=0
-
+      @earnings = 0
 
     end
 
-
-    def quota
-      50 + @experience/2
-    end
 
 
 
     def deliver(start_address, end_address)
-      @experience = (@experience + (end_address-start_address)/2)
-      if @experience == 50
-      then @experience * 0.25
-    elsif @experience > 50
-         then (50*0.25 + (@experience - 50)*0.5)
-       elsif @experience < 50
-          then (@experience*0.25)-2
-          end
+      paper_delivered = 0
+      if side == "odd"
+        start_address..end_address.each do |address|
+          if address % 2 != 0
+             paper_delivered += 1
+           end
+         end
+       end
+       if side == "even"
+         start_address..end_address.each do |address|
+           if address % 2 == 0
+             paper_delivered += 1
+           end
+         end
+        end
+
+      if (papers_delivered- @quota )== 50
+        then
+        @earnings = papers_delivered * 0.25
+      elsif papers_delivered > 50
+        then
+        @earnings = papers_delivered
+
     end
+
+
+  def earnings
+
+    return @earnings
+  end
+
+
+  def update_earnings
+
+    total = @houses_delivered - quota
+
+
+    if total < 0
+      then updates_earnings - 2
+    elsif  total > 0
+      then updated_earnings + 0.5 * (@houses_delivered - quota)
+
+
+
+
+
+
+  def quota
+    50 + (@experience/2)
+  end
+
+
+
+
 
 
 
