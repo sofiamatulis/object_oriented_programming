@@ -27,3 +27,9 @@ c.greeting
 
 ch = Student.new("Christina")
 ch.greeting
+
+
+ch.learn  # --> it works because Christina is a student and the learn method is inside of this subclass
+ch.teach  # --> it does not work because Christina is a student and the learn method is inside of the instructor class
+c.learn # --> it works because Chris is an instructor  and the learn method is inside of this subclass
+c.teach  # --> it does not work because Chris is an instructor  and the learn method is inside of the student class 
