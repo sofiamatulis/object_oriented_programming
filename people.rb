@@ -21,3 +21,6 @@ class Instructor < Person
 end
 
 end
+
+c = Instructor.new("Chris")
+c.greeting
