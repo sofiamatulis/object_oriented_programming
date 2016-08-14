@@ -2,13 +2,13 @@ class Receipt
 
 
 
-  def initialize(list_of_total_items)
-    @list_of_total_items = list_of_total_items
+  def initialize(list_items)
+    @list_items = list_items
   end
 
   def print_receipt
-  @list_of_total_items.each do |item,price|
-    puts " #{item} for $ #{price} "
+  @list_items.each do |item,price,quantity|
+    puts " #{quantity} #{item} #{price} "
   end
 end
 
