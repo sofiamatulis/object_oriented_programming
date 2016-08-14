@@ -1,66 +1,86 @@
-#require_relative 'receipt'
-# require_relative 'cash_register'
+require_relative 'receipt1'
 
 class Item
 
   attr_reader :name
-  attr_accessor :price
+  attr_reader :price
 
 
 
- def initialize (name,category,price,quantity)
+  @@total_value = 0
+  @@sales_tax_value = 0
+
+  def self.total_value
+    @@total_value
+  end
+
+  def self.sales_tax_value
+    @@sales_tax_value
+  end
+
+#quantity
+
+  def initialize (name,price,category,imported)
+  # @quantity =+ 1
   @name = name
-  @category = category
   @price = price
-  @quantity = quantity
-  @imported_item = 0
-  @sales_tax = 0
-  if name.split.include?("imported")
-  @imported = true
-  else
-  @imported = false
-  end
+  @category = category
+  @imported = imported
+
+
+
+    # if name.split.include?("imported")
+    # @imported = true
+    # else
+    # @imported = false
+    # end
 
   end
 
 
-def sales_tax
+  def tax
 
-  if @imported == false && (@category == "fruit" || @category == "medical" || @category == "book")
-     @price
-  elsif @imported == true && @category == "other"
-    @sales_tax = @price * 0.10
-  elsif @imported == true && (@category == "fruit" || @category == "medical" || @category == "book")
-       @sales_tax = @price * 0.05
-  elsif @imported == false && @category == "other"
-        @sales_tax = @price * 0.10 * 0.05
+  if (@imported == false) && (@category == "food" || @category == "medical" || @category == "book")
+    #  @@sales_tax_value = 0
+    @@total_value += @price
+
+  elsif (@imported == false) && (@category == "other")
+    @@sales_tax_value = @price * 0.10
+    @@total_value += @price * 1.10
+
+
+  elsif (@imported == true) && (@category == "food" || @category == "medical" || @category == "book")
+       @@sales_tax_value = @price * 0.05
+      @@total_value += @price * 1.05
+
+
+  elsif (@imported == true) && (@category == "other")
+        @@sales_tax_value = @price * 0.10 * 0.05
+        @@total_value += @price * 1.10 * 1.05
   end
 
-  return [@sales_tax, @price, @quantity, @name]
+ end
+
 
 
 end
 
-end
-
-class Receipt
-
-attr_accessor :total
-  def initialize(*items)
-    @items = items
-end
-
-def print_receipt
-  @items.each do |item|
-    puts item
-  end
-end
-end
 
 
+item1= Item.new("Harry Potter", 10, "book",false)
+item2 = Item.new("Banana", 3, "food",false)
+item3 = Item.new("imported table", 11,"other",true)
 
-item1= Item.new("book", "book", 12.49, 1)
-item1_info = item1.sales_tax
+list_of_total_items = {
+  item1.name => item1.tax,
+  item2.name => item2.tax,
+  item3.name => item3.tax
+}
 
-receipt1 = Receipt.new(item1_info)
+
+receipt1 = Receipt.new(list_of_total_items)
+
 receipt1.print_receipt
+
+puts "Sales Tax: $#{ Item.sales_tax_value}"
+puts "Total Bill: $#{ Item.total_value}"
