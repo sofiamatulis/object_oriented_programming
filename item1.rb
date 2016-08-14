@@ -43,25 +43,25 @@ class Item
 
   if (@imported == false) && (@category == "food" || @category == "medical" || @category == "book")
     #  @@sales_tax_value = 0
-    @@total_value += (@price * @quantity)
+    @@total_value += (@price * @quantity).round(2)
     @price * @quantity
 
   elsif (@imported == false) && (@category == "other")
-    @@sales_tax_value += (@price * 0.10 * @quantity)
-    @@total_value += (@price * 1.10 * @quantity)
+    @@sales_tax_value += (@price * 0.10 * @quantity).round(2)
+    @@total_value += (@price * 1.10 * @quantity).round(2)
     @price * 1.10 * @quantity
 
 
   elsif (@imported == true) && (@category == "food" || @category == "medical" || @category == "book")
-       @@sales_tax_value += (@price * 0.05 * @quantity)
-      @@total_value += (@price * 1.05 * @quantity)
-      @price * 1.05 * @quantity
+       @@sales_tax_value += (@price * 0.05 * @quantity).round(2)
+      @@total_value += (@price * 1.05 * @quantity).round(2)
+      (@price * 1.05 * @quantity).round(2)
 
 
   elsif (@imported == true) && (@category == "other")
-        @@sales_tax_value += (@price * 0.10 * 0.05 * @quantity)
-        @@total_value += (@price * 1.10 * 1.05 * @quantity)
-        @price * 1.10 * 1.05 * @quantity
+        @@sales_tax_value += (@price * 0.10 * 0.05 * @quantity).round(2)
+        @@total_value += (@price * 1.10 * 1.05 * @quantity).round(2)
+        (@price * 1.10 * 1.05 * @quantity).round(2)
   end
 
  end
