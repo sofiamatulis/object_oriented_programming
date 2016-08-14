@@ -33,7 +33,7 @@ class Paperboy
         end
 
       expected_quota = quota
-      if (@experience - @experience) == 0
+      if (@experience - expected_quota) == 0
         @earnings =  @experience * 0.25
       elsif (@experience- expected_quota) > 0
         @earnings = (@experience- expected_quota) * 0.5 + (expected_quota * 0.25 )
